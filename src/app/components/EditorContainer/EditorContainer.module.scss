@@ -18,6 +18,7 @@
   width: 600px;
   background: $color-white;
 }
+//Kinda weird that the placeholder is an element outside the input; need css magic to be inline with it
 .Placeholder {
   color: $color-placeholder;
   position: absolute;
