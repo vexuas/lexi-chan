@@ -1,8 +1,15 @@
 import styles from './EditorContainer.module.scss';
-import { $getRoot, $getSelection, EditorState } from 'lexical';
+import { $getRoot, $getSelection, EditorState, EditorThemeClasses } from 'lexical';
+import { LexicalComposer, InitialConfigType } from '@lexical/react/LexicalComposer';
+import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 
 export default function EditorContainer() {
-  const theme = {};
+  const theme: EditorThemeClasses = {
+    paragraph: styles.Paragraph,
+  };
   const onChange = (editorState: EditorState) => {
     editorState.read(() => {
       const root = $getRoot();
@@ -13,7 +20,7 @@ export default function EditorContainer() {
   const onError = (error: any) => {
     console.error(error);
   };
-  const initialConfig = {
+  const initialConfig: InitialConfigType = {
     namespace: 'Lexi-chan',
     theme,
     onError,
@@ -21,6 +28,16 @@ export default function EditorContainer() {
   return (
     <div className={styles.Container}>
       <p>Oh wow a cool editor!</p>
+      <LexicalComposer initialConfig={initialConfig}>
+        <div className={styles.EditorContainer}>
+          <PlainTextPlugin
+            contentEditable={<ContentEditable className={styles.Input} />}
+            placeholder={<div className={styles.Placeholder}>Try me!</div>}
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <OnChangePlugin onChange={onChange} />
+        </div>
+      </LexicalComposer>
     </div>
   );
 }

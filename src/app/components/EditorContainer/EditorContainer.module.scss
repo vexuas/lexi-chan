@@ -1,7 +1,36 @@
+@import '../../../assets/styles/variables.scss';
+
 .Container {
+  padding-top: 128px;
   display: flex;
-  height: 100%;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+}
+.EditorContainer {
+  border: 1px solid $color-black;
+  border-radius: 15px;
+  width: 600px;
+  background: $color-white;
+}
+.Placeholder {
+  position: absolute;
+  visibility: hidden;
+  top: 15px;
+  font-size: 15px;
+  user-select: none;
+  display: inline-block;
+  pointer-events: none;
+}
+.Input {
+  min-height: 150px;
+  resize: none;
+  font-size: 21px;
+  line-height: 28px;
+  position: relative;
+  padding: 21px;
+  border-radius: 15px;
+  outline: 0;
+}
+.Paragraph {
+  margin: 0 0 21px 0;
 }
