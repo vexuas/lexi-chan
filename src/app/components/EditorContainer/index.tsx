@@ -5,6 +5,7 @@ import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 
 export default function EditorContainer() {
   const theme: EditorThemeClasses = {
@@ -27,15 +28,16 @@ export default function EditorContainer() {
   };
   return (
     <div className={styles.Container}>
-      <p>Oh wow a cool editor!</p>
+      <div className={styles.Header}>Oh wow a cool editor!</div>
       <LexicalComposer initialConfig={initialConfig}>
         <div className={styles.EditorContainer}>
           <PlainTextPlugin
             contentEditable={<ContentEditable className={styles.Input} />}
-            placeholder={<div className={styles.Placeholder}>Try me!</div>}
+            placeholder={<div className={styles.Placeholder}>Try me...</div>}
             ErrorBoundary={LexicalErrorBoundary}
           />
           <OnChangePlugin onChange={onChange} />
+          <HistoryPlugin />
         </div>
       </LexicalComposer>
     </div>
