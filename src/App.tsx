@@ -1,12 +1,10 @@
 import './App.scss';
+import EditorContainer from './app/components/EditorContainer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Oh wow a cool editor!</p>
-        <div>Just imagine an editor here</div>
-      </header>
+      <EditorContainer />
     </div>
   );
 }
