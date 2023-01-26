@@ -10,7 +10,7 @@
   justify-content: center;
 }
 .Tools {
-  background-color: #eff1f5;
+  background-color: $bg-color-toolbar;
   padding: 9px 16px;
   border-radius: 0 0 8px 8px;
 }
@@ -25,9 +25,12 @@
   min-width: 24px;
 
   &:hover {
-    background-color: #b0b4b7;
+    background-color: $bg-color-toolbar-button-hover;
   }
   &:active {
-    background-color: #9fa3a6;
+    background-color: $bg-color-toolbar-button-active;
   }
+}
+.Active {
+  background-color: $bg-color-toolbar-button-active;
 }
