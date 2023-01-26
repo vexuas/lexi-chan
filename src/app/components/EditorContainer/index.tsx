@@ -18,6 +18,10 @@ export default function EditorContainer() {
    */
   const theme: EditorThemeClasses = {
     paragraph: styles.Paragraph,
+    text: {
+      underline: styles.Underline,
+      strikethrough: styles.Strikethrough,
+    },
   };
   /**
    * Custom handler for when content changes in the editor

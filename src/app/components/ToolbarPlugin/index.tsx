@@ -37,6 +37,8 @@ export function ToolbarPlugin() {
       COMMAND_PRIORITY_CRITICAL
     );
   }, [editor, updateToolbar]);
+
+  useEffect(() => {});
   return (
     <div className={styles.Container}>
       <div className={styles.Tools}>
