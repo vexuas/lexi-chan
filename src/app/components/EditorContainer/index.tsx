@@ -1,7 +1,7 @@
 import styles from './EditorContainer.module.scss';
 import { $getRoot, $getSelection, EditorState, EditorThemeClasses } from 'lexical';
 import { LexicalComposer, InitialConfigType } from '@lexical/react/LexicalComposer';
-import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
@@ -50,7 +50,7 @@ export default function EditorContainer() {
       {/* Pretty cool that you can just add native plugins on a per-need basis. More reading here: https://lexical.dev/docs/react/plugins */}
       <LexicalComposer initialConfig={initialConfig}>
         <div className={styles.EditorContainer}>
-          <PlainTextPlugin
+          <RichTextPlugin
             contentEditable={<ContentEditable className={styles.Input} />}
             placeholder={<div className={styles.Placeholder}>Try me...</div>}
             ErrorBoundary={LexicalErrorBoundary}
