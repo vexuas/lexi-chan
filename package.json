@@ -1,6 +1,6 @@
 {
   "name": "lexi-chan",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@lexical/react": "^0.7.6",
@@ -20,6 +20,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "auto:version": "yarn version --`auto version`",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
