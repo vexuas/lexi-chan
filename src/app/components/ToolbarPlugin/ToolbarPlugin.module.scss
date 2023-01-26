@@ -1,0 +1,36 @@
+@import '../../../assets/styles/variables.scss';
+
+.Container {
+  width: 800px;
+  border: 2px solid $color-black;
+  border-bottom: none;
+  background-color: $color-white;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: center;
+}
+.Tools {
+  background-color: $bg-color-toolbar;
+  padding: 9px 16px;
+  border-radius: 0 0 8px 8px;
+}
+.ToolButton {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 21px;
+  color: $color-default;
+  border: none;
+  background-color: transparent;
+  border-radius: 4px;
+  min-width: 24px;
+
+  &:hover {
+    background-color: $bg-color-toolbar-button-hover;
+  }
+  &:active {
+    background-color: $bg-color-toolbar-button-active;
+  }
+}
+.Active {
+  background-color: $bg-color-toolbar-button-active;
+}

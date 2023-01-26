@@ -1,11 +1,12 @@
 import styles from './EditorContainer.module.scss';
 import { $getRoot, $getSelection, EditorState, EditorThemeClasses } from 'lexical';
 import { LexicalComposer, InitialConfigType } from '@lexical/react/LexicalComposer';
-import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { ToolbarPlugin } from '../ToolbarPlugin';
 
 //Definitely check out this first and play with the demo: https://lexical.dev/docs/getting-started/react
 export default function EditorContainer() {
@@ -17,6 +18,12 @@ export default function EditorContainer() {
    */
   const theme: EditorThemeClasses = {
     paragraph: styles.Paragraph,
+    text: {
+      underline: styles.Underline,
+      strikethrough: styles.Strikethrough,
+      bold: styles.Bold,
+      italic: styles.Italic,
+    },
   };
   /**
    * Custom handler for when content changes in the editor
@@ -49,8 +56,9 @@ export default function EditorContainer() {
       <div className={styles.Header}>Oh wow a cool editor!</div>
       {/* Pretty cool that you can just add native plugins on a per-need basis. More reading here: https://lexical.dev/docs/react/plugins */}
       <LexicalComposer initialConfig={initialConfig}>
+        <ToolbarPlugin />
         <div className={styles.EditorContainer}>
-          <PlainTextPlugin
+          <RichTextPlugin
             contentEditable={<ContentEditable className={styles.Input} />}
             placeholder={<div className={styles.Placeholder}>Try me...</div>}
             ErrorBoundary={LexicalErrorBoundary}

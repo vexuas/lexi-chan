@@ -14,16 +14,17 @@
 .EditorContainer {
   position: relative;
   border: 2px solid $color-black;
-  border-radius: 15px;
-  width: 600px;
+  border-top: none;
+  border-radius: 0 0 15px 15px;
+  width: 800px;
   background: $color-white;
 }
 //Kinda weird that the placeholder is an element outside the input; need css magic to be inline with it
 .Placeholder {
   color: $color-placeholder;
   position: absolute;
-  top: 21px;
-  left: 21px;
+  top: 32px;
+  left: 32px;
   font-size: 21px;
   user-select: none;
   display: inline-block;
@@ -35,10 +36,22 @@
   font-size: 21px;
   line-height: 28px;
   position: relative;
-  padding: 21px;
+  padding: 32px;
   border-radius: 15px;
   outline: 0;
 }
 .Paragraph {
   margin: 0 0 21px 0;
+}
+.Underline {
+  text-decoration: underline;
+}
+.Strikethrough {
+  text-decoration: line-through;
+}
+.Bold {
+  font-weight: 600;
+}
+.Italic {
+  font-style: italic;
 }
