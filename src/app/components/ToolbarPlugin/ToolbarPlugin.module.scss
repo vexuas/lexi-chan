@@ -1,0 +1,11 @@
+@import '../../../assets/styles/variables.scss';
+
+.Container {
+  width: 800px;
+  border: 2px solid $color-black;
+  border-bottom: none;
+  background-color: $color-white;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: center;
+}

@@ -6,6 +6,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { ToolbarPlugin } from '../ToolbarPlugin';
 
 //Definitely check out this first and play with the demo: https://lexical.dev/docs/getting-started/react
 export default function EditorContainer() {
@@ -49,6 +50,7 @@ export default function EditorContainer() {
       <div className={styles.Header}>Oh wow a cool editor!</div>
       {/* Pretty cool that you can just add native plugins on a per-need basis. More reading here: https://lexical.dev/docs/react/plugins */}
       <LexicalComposer initialConfig={initialConfig}>
+        <ToolbarPlugin />
         <div className={styles.EditorContainer}>
           <RichTextPlugin
             contentEditable={<ContentEditable className={styles.Input} />}
