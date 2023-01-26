@@ -9,3 +9,25 @@
   display: flex;
   justify-content: center;
 }
+.Tools {
+  background-color: #eff1f5;
+  padding: 9px 16px;
+  border-radius: 0 0 8px 8px;
+}
+.ToolButton {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 21px;
+  color: $color-default;
+  border: none;
+  background-color: transparent;
+  border-radius: 4px;
+  min-width: 24px;
+
+  &:hover {
+    background-color: #b0b4b7;
+  }
+  &:active {
+    background-color: #9fa3a6;
+  }
+}
