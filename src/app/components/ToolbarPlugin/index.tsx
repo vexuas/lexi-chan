@@ -19,7 +19,6 @@ export function ToolbarPlugin() {
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection() as RangeSelection;
-    console.log('wtf');
     setIsBold(selection.hasFormat('bold'));
     setIsItalic(selection.hasFormat('italic'));
     setIsUnderline(selection.hasFormat('underline'));
@@ -30,6 +29,7 @@ export function ToolbarPlugin() {
     return editor.registerCommand(
       SELECTION_CHANGE_COMMAND,
       (_payload, newEditor) => {
+        console.log('hello');
         updateToolbar();
         setActiveEditor(newEditor);
         return false;
@@ -38,7 +38,13 @@ export function ToolbarPlugin() {
     );
   }, [editor, updateToolbar]);
 
-  useEffect(() => {});
+  useEffect(() => {
+    return activeEditor.registerUpdateListener(({ editorState }) => {
+      editorState.read(() => {
+        updateToolbar();
+      });
+    });
+  }, [activeEditor, updateToolbar]);
   return (
     <div className={styles.Container}>
       <div className={styles.Tools}>
