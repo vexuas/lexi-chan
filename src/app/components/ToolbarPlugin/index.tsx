@@ -19,7 +19,7 @@ export function ToolbarPlugin() {
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection() as RangeSelection;
-
+    console.log('wtf');
     setIsBold(selection.hasFormat('bold'));
     setIsItalic(selection.hasFormat('italic'));
     setIsUnderline(selection.hasFormat('underline'));

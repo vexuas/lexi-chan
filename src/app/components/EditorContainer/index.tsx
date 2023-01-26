@@ -21,6 +21,8 @@ export default function EditorContainer() {
     text: {
       underline: styles.Underline,
       strikethrough: styles.Strikethrough,
+      bold: styles.Bold,
+      italic: styles.Italic,
     },
   };
   /**
