@@ -83,9 +83,8 @@ export function ToolbarPlugin() {
       CREATE_MERGE_TAG_COMMAND,
       () => {
         const selection = $getSelection() as RangeSelection;
-        console.log('create merge tag');
         const newMergeTag = $createMergeTag(selection.getTextContent());
-        console.log(newMergeTag.getType());
+        selection.insertNodes([newMergeTag]);
         return false;
       },
       COMMAND_PRIORITY_EDITOR

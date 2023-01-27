@@ -15,17 +15,15 @@ export class MergeTagNode extends TextNode {
   }
   createDOM(config: EditorConfig): HTMLElement {
     const element = super.createDOM(config);
-    element.style.color = 'blue';
+    element.className = 'MergeTag';
     return element;
   }
   updateDOM(prevNode: TextNode, dom: HTMLElement, config: EditorConfig): boolean {
-    const isUpdated = super.updateDOM(prevNode, dom, config);
-    dom.style.color = 'blue';
-    return isUpdated;
+    return false;
   }
 }
 export function $createMergeTag(text: string) {
-  return new MergeTagNode(text);
+  return new MergeTagNode(text).setMode('token');
 }
 export function $isMergeTag(node: LexicalNode) {
   return node instanceof MergeTagNode;
