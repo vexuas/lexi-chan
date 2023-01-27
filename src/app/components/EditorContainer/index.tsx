@@ -51,7 +51,7 @@ export default function EditorContainer() {
     namespace: 'Lexi-chan',
     theme,
     onError,
-    nodes: [MergeTagNode],
+    nodes: [MergeTagNode], //Custom Nodes
   };
   return (
     <div className={styles.Container}>
