@@ -2,12 +2,16 @@ import styles from './ToolbarPlugin.module.scss';
 import {
   $getSelection,
   COMMAND_PRIORITY_CRITICAL,
+  COMMAND_PRIORITY_EDITOR,
+  createCommand,
   FORMAT_TEXT_COMMAND,
+  LexicalCommand,
   RangeSelection,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useCallback, useEffect, useState } from 'react';
+import { $createMergeTag } from '../CustomNodes/MergeTagNode';
 
 /**
  * Plugins are essentially react components that you can use inside the LexicalComposer wrapper
@@ -71,6 +75,22 @@ export function ToolbarPlugin() {
       });
     });
   }, [activeEditor, updateToolbar]);
+
+  const CREATE_MERGE_TAG_COMMAND: LexicalCommand<undefined> = createCommand();
+
+  useEffect(() => {
+    return editor.registerCommand(
+      CREATE_MERGE_TAG_COMMAND,
+      () => {
+        const selection = $getSelection() as RangeSelection;
+        console.log('create merge tag');
+        const newMergeTag = $createMergeTag(selection.getTextContent());
+        console.log(newMergeTag.getType());
+        return false;
+      },
+      COMMAND_PRIORITY_EDITOR
+    );
+  });
   return (
     <div className={styles.Container}>
       {/* Commands can be dispatched anywhere as long as you have access to the editor state */}
@@ -98,6 +118,14 @@ export function ToolbarPlugin() {
           onClick={() => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
         >
           U
+        </button>
+        <button
+          className={`${styles.ToolButton}`}
+          onClick={() => {
+            activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, undefined);
+          }}
+        >
+          M
         </button>
       </div>
     </div>
