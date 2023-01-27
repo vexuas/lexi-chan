@@ -1,9 +1,9 @@
-import styles from './App.module.scss';
+import './App.scss';
 import EditorContainer from './app/components/EditorContainer';
 
 function App() {
   return (
-    <div className={styles.Container}>
+    <div className="App">
       <EditorContainer />
     </div>
   );
