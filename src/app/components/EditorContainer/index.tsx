@@ -55,7 +55,7 @@ export default function EditorContainer() {
   };
   return (
     <div className={styles.Container}>
-      <div className={styles.Header}>Oh wow a cool editor!</div>
+      <div className={styles.Header}>Lexichan</div>
       {/* Pretty cool that you can just add native plugins on a per-need basis. More reading here: https://lexical.dev/docs/react/plugins */}
       <LexicalComposer initialConfig={initialConfig}>
         <ToolbarPlugin />
