@@ -98,33 +98,34 @@ export function ToolbarPlugin() {
           className={`${styles.ToolButton} ${isBold ? styles.Active : ''}`}
           onClick={() => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
         >
-          B
+          <i className="fa-solid fa-bold"></i>
         </button>
         <button
           className={`${styles.ToolButton} ${isItalic ? styles.Active : ''}`}
           onClick={() => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
         >
-          I
+          <i className="fa-solid fa-italic"></i>
         </button>
         <button
           className={`${styles.ToolButton} ${isStrikethrough ? styles.Active : ''}`}
           onClick={() => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
         >
-          S
+          <i className="fa-solid fa-strikethrough"></i>
         </button>
         <button
           className={`${styles.ToolButton} ${isUnderline ? styles.Active : ''}`}
           onClick={() => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
         >
-          U
+          <i className="fa-solid fa-underline"></i>
         </button>
+        <span className={styles.Divider}></span>
         <button
           className={`${styles.ToolButton}`}
           onClick={() => {
             activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, undefined);
           }}
         >
-          M
+          <i className="fa-regular fa-clipboard"></i>
         </button>
       </div>
     </div>
