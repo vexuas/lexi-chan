@@ -2,7 +2,7 @@
 
 .Container {
   width: 800px;
-  border: 2px solid $color-black;
+  box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.1);
   border-bottom: none;
   background-color: $color-white;
   border-radius: 15px 15px 0 0;
