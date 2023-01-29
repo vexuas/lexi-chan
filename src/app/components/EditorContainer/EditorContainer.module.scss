@@ -7,13 +7,16 @@
   align-items: center;
 }
 .Header {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 74px;
+  font-weight: 600;
   margin-bottom: 21px;
+  letter-spacing: 21px;
+  color: $color-black;
+  font-family: 'Caveat';
 }
 .EditorContainer {
   position: relative;
-  border: 2px solid $color-black;
+  box-shadow: 0 14px 16px rgba(0, 0, 0, 0.1);
   border-top: none;
   border-radius: 0 0 15px 15px;
   width: 800px;
@@ -29,6 +32,7 @@
   user-select: none;
   display: inline-block;
   pointer-events: none;
+  line-height: 28px;
 }
 .Input {
   min-height: 150px;
