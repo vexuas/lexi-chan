@@ -1,4 +1,5 @@
-import { NodeKey, TextNode, LexicalNode, EditorConfig } from 'lexical';
+import { NodeKey, DecoratorNode, LexicalNode, EditorConfig, LexicalEditor } from 'lexical';
+import { ReactNode } from 'react';
 
 /**
  * Nodes are a core concept in Lexical
@@ -10,11 +11,11 @@ import { NodeKey, TextNode, LexicalNode, EditorConfig } from 'lexical';
  * - DecoratorNode: Wrapper node to insert arbitrary view inside the editor
  * Basically any special tags and entities you'd want to insert in the editor, you'd use these
  */
-export class MergeTagNode extends TextNode {
+export class MergeTagNode extends DecoratorNode<ReactNode> {
   mergeTagText: string;
 
   constructor(text: string, key?: NodeKey) {
-    super(text, key);
+    super(key);
     this.mergeTagText = text;
   }
   static getType(): string {
@@ -23,13 +24,17 @@ export class MergeTagNode extends TextNode {
   static clone(node: MergeTagNode): MergeTagNode {
     return new MergeTagNode(node.__text, node.__key);
   }
-  createDOM(config: EditorConfig): HTMLElement {
-    const element = super.createDOM(config);
-    element.className = 'MergeTag';
-    return element;
+  createDOM(_config: EditorConfig, _editor: LexicalEditor): HTMLElement {
+    return document.createElement('merge-tag');
   }
-  updateDOM(prevNode: TextNode, dom: HTMLElement, config: EditorConfig): boolean {
+  updateDOM(_prevNode: unknown, _dom: HTMLElement, _config: EditorConfig): boolean {
     return false;
+  }
+  decorate(): ReactNode {
+    return this.mergeTagText;
+  }
+  isIsolated(): boolean {
+    return true;
   }
 }
 /**
@@ -38,7 +43,7 @@ export class MergeTagNode extends TextNode {
  * An important note: To properly create custom nodes, you'd need to register them to the editor by describing them in the editorConfig
  */
 export function $createMergeTag(text: string) {
-  return new MergeTagNode(text).setMode('token');
+  return new MergeTagNode(text);
 }
 export function $isMergeTag(node: LexicalNode) {
   return node instanceof MergeTagNode;
