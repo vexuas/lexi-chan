@@ -86,6 +86,7 @@ export function ToolbarPlugin() {
         const selection = $getSelection() as RangeSelection;
         const newMergeTag = $createMergeTag(payload);
         selection.insertNodes([newMergeTag]);
+        selection.insertText(' ');
         return false;
       },
       COMMAND_PRIORITY_EDITOR
@@ -128,8 +129,11 @@ export function ToolbarPlugin() {
         </button>
         <span className={styles.Divider}></span>
         <DownShift
-          onChange={(value) => {
-            value && activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, value);
+          onChange={(selected, action) => {
+            if (selected) {
+              activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, selected.label);
+              action.toggleMenu();
+            }
           }}
           itemToString={(item) => (item ? item.label : '')}
         >
