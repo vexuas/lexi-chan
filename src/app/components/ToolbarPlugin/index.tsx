@@ -126,6 +126,7 @@ export function ToolbarPlugin() {
           }}
         >
           <i className="fa-regular fa-clipboard"></i>
+          <i className={`${styles.Caret} fa-solid fa-caret-down`}></i>
         </button>
       </div>
     </div>
