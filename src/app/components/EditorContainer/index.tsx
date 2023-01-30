@@ -8,6 +8,7 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { ToolbarPlugin } from '../ToolbarPlugin';
 import { MergeTagNode } from '../CustomNodes/MergeTagNode';
+import { NodeTransform } from '../NodeTransform';
 
 //Definitely check out this first and play with the demo: https://lexical.dev/docs/getting-started/react
 export default function EditorContainer() {
@@ -67,6 +68,7 @@ export default function EditorContainer() {
           />
           <OnChangePlugin onChange={onChange} />
           <HistoryPlugin />
+          <NodeTransform />
         </div>
       </LexicalComposer>
     </div>
