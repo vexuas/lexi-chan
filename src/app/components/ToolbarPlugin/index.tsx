@@ -12,6 +12,7 @@ import {
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useCallback, useEffect, useState } from 'react';
 import { $createMergeTag } from '../CustomNodes/MergeTagNode';
+import DownShift from 'downshift';
 
 /**
  * Plugins are essentially react components that you can use inside the LexicalComposer wrapper
@@ -61,6 +62,26 @@ export function ToolbarPlugin() {
       COMMAND_PRIORITY_CRITICAL
     );
   }, [editor, updateToolbar]);
+  /**
+   * As stated above, you are able create custom commands.
+   * You can control whatever is passed in and the necessary interactions that follows
+   * In this case, this creates a new command and registers it in inserting a merge tag in the selectedSelection
+   * And this command can be called wherever you need it
+   */
+  const CREATE_MERGE_TAG_COMMAND: LexicalCommand<undefined> = createCommand();
+  useEffect(() => {
+    return editor.registerCommand(
+      CREATE_MERGE_TAG_COMMAND,
+      (payload: string) => {
+        const selection = $getSelection() as RangeSelection;
+        const newMergeTag = $createMergeTag(payload);
+        selection.insertNodes([newMergeTag]);
+        selection.insertText(' ');
+        return false;
+      },
+      COMMAND_PRIORITY_EDITOR
+    );
+  });
 
   /**
    * Listeners are a mechanism that lets the Editor instance inform the user when a certain operation has occured
@@ -76,20 +97,13 @@ export function ToolbarPlugin() {
     });
   }, [activeEditor, updateToolbar]);
 
-  const CREATE_MERGE_TAG_COMMAND: LexicalCommand<undefined> = createCommand();
-
-  useEffect(() => {
-    return editor.registerCommand(
-      CREATE_MERGE_TAG_COMMAND,
-      () => {
-        const selection = $getSelection() as RangeSelection;
-        const newMergeTag = $createMergeTag(selection.getTextContent());
-        selection.insertNodes([newMergeTag]);
-        return false;
-      },
-      COMMAND_PRIORITY_EDITOR
-    );
-  });
+  const tagItems = [
+    { name: 'tag_name_1', label: 'Tag Name 1' },
+    {
+      name: 'tag_name_2',
+      label: 'Tag Name 2',
+    },
+  ];
   return (
     <div className={styles.Container}>
       {/* Commands can be dispatched anywhere as long as you have access to the editor state */}
@@ -119,14 +133,43 @@ export function ToolbarPlugin() {
           <i className="fa-solid fa-underline"></i>
         </button>
         <span className={styles.Divider}></span>
-        <button
-          className={`${styles.ToolButton}`}
-          onClick={() => {
-            activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, undefined);
+        {/* Experimenting with downshift for easier select dropdown implementation; kinda interesting but not sure if I like it so much */}
+        <DownShift
+          onSelect={(selected, action) => {
+            if (selected) {
+              activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, selected.label);
+              action.reset();
+              action.toggleMenu();
+            }
           }}
+          itemToString={(item) => (item ? item.label : '')}
         >
-          <i className="fa-regular fa-clipboard"></i>
-        </button>
+          {({ isOpen, getToggleButtonProps, getMenuProps, getItemProps }) => {
+            return (
+              <div
+                className={`${styles.ToolButton} ${isOpen ? styles.MenuActive : ''}`}
+                {...getToggleButtonProps()}
+              >
+                <i className="fa-regular fa-clipboard"></i>
+                <i className={`${styles.Caret} fa-solid fa-caret-down`}></i>
+                {isOpen ? (
+                  <div className={styles.TagMenu} {...getMenuProps()}>
+                    {tagItems.map((item, index) => {
+                      return (
+                        <span
+                          className={styles.TagItem}
+                          {...getItemProps({ key: item.name, index, item })}
+                        >
+                          <span>{item.label}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
+            );
+          }}
+        </DownShift>
       </div>
     </div>
   );

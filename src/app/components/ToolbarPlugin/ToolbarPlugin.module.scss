@@ -17,6 +17,7 @@
   border-radius: 0 0 8px 8px;
 }
 .ToolButton {
+  position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -28,6 +29,7 @@
   min-width: 24px;
   padding: 3px 6px;
   margin-right: 2px;
+  transition: background-color 0.1s ease;
 
   &:hover {
     background-color: $bg-color-toolbar-button-hover;
@@ -42,10 +44,41 @@
 .Active {
   background-color: $bg-color-toolbar-button-active;
 }
+.MenuActive {
+  background-color: $bg-color-toolbar-button-hover;
+}
 .Divider {
   width: 1px;
   height: 100%;
   margin-left: 4px;
   margin-right: 4px;
   border-left: 2px solid $color-default;
+}
+.Caret {
+  margin-left: 12px;
+}
+.TagMenu {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  padding: 16px;
+  z-index: 100;
+  position: absolute;
+  background-color: $bg-color-toolbar;
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+  top: 42px;
+  left: 0;
+  border-radius: 8px;
+}
+.TagItem {
+  display: flex;
+  padding: 4px;
+  text-align: center;
+  align-items: center;
+  line-height: 28px;
+  border-radius: 8px;
+  transition: background-color 0.1s ease;
+  &:hover {
+    background-color: $bg-color-toolbar-button-hover;
+  }
 }
