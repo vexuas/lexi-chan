@@ -10,6 +10,9 @@ export function NodeTransform() {
       if (textNode.getTextContent().includes('/') && textNode.getStyle() !== 'color: blue') {
         textNode.setStyle('color: blue');
       }
+      if (!textNode.getTextContent().includes('/') && textNode.getStyle() === 'color: blue') {
+        textNode.setStyle('');
+      }
     });
   }, [editor]);
   return null;
