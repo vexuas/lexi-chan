@@ -62,6 +62,26 @@ export function ToolbarPlugin() {
       COMMAND_PRIORITY_CRITICAL
     );
   }, [editor, updateToolbar]);
+  /**
+   * As stated above, you are able create custom commands.
+   * You can control whatever is passed in and the necessary interactions that follows
+   * In this case, this creates a new command and registers it in inserting a merge tag in the selectedSelection
+   * And this command can be called wherever you need it
+   */
+  const CREATE_MERGE_TAG_COMMAND: LexicalCommand<undefined> = createCommand();
+  useEffect(() => {
+    return editor.registerCommand(
+      CREATE_MERGE_TAG_COMMAND,
+      (payload: string) => {
+        const selection = $getSelection() as RangeSelection;
+        const newMergeTag = $createMergeTag(payload);
+        selection.insertNodes([newMergeTag]);
+        selection.insertText(' ');
+        return false;
+      },
+      COMMAND_PRIORITY_EDITOR
+    );
+  });
 
   /**
    * Listeners are a mechanism that lets the Editor instance inform the user when a certain operation has occured
@@ -77,21 +97,6 @@ export function ToolbarPlugin() {
     });
   }, [activeEditor, updateToolbar]);
 
-  const CREATE_MERGE_TAG_COMMAND: LexicalCommand<undefined> = createCommand();
-
-  useEffect(() => {
-    return editor.registerCommand(
-      CREATE_MERGE_TAG_COMMAND,
-      (payload: string) => {
-        const selection = $getSelection() as RangeSelection;
-        const newMergeTag = $createMergeTag(payload);
-        selection.insertNodes([newMergeTag]);
-        selection.insertText(' ');
-        return false;
-      },
-      COMMAND_PRIORITY_EDITOR
-    );
-  });
   const tagItems = [
     { name: 'tag_name_1', label: 'Tag Name 1' },
     {
@@ -128,10 +133,12 @@ export function ToolbarPlugin() {
           <i className="fa-solid fa-underline"></i>
         </button>
         <span className={styles.Divider}></span>
+        {/* Experimenting with downshift for easier select dropdown implementation; kinda interesting but not sure if I like it so much */}
         <DownShift
-          onChange={(selected, action) => {
+          onSelect={(selected, action) => {
             if (selected) {
               activeEditor.dispatchCommand(CREATE_MERGE_TAG_COMMAND, selected.label);
+              action.reset();
               action.toggleMenu();
             }
           }}

@@ -10,6 +10,7 @@ import { ReactNode } from 'react';
  * - TextNode: Leaf type of node that contains text
  * - DecoratorNode: Wrapper node to insert arbitrary view inside the editor
  * Basically any special tags and entities you'd want to insert in the editor, you'd use these
+ * Experimentally using DecoratorNode below to render custom html tags; still torn between this and TextNode
  */
 export class MergeTagNode extends DecoratorNode<ReactNode> {
   mergeTagText: string;
