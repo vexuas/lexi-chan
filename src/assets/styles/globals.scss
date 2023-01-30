@@ -1,11 +1,11 @@
 @import '../styles/variables.scss';
 
 merge-tag {
-  color: $label-blue;
-  background-color: #d8e8f6;
+  color: $label-green;
+  background-color: #cef5d1;
   padding: 2px 4px;
   line-height: 24px;
-  box-shadow: inset 0px -1px 0px #3a8dd1;
+  box-shadow: inset 0px -1px 0px $label-green;
   display: inline;
   pointer-events: none;
 }
