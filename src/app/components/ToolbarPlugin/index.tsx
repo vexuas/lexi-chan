@@ -37,10 +37,12 @@ export function ToolbarPlugin() {
    **/
   const updateToolbar = useCallback(() => {
     const selection = $getSelection() as RangeSelection;
-    setIsBold(selection.hasFormat('bold'));
-    setIsItalic(selection.hasFormat('italic'));
-    setIsUnderline(selection.hasFormat('underline'));
-    setIsStrikethrough(selection.hasFormat('strikethrough'));
+    if (selection) {
+      setIsBold(selection.hasFormat('bold'));
+      setIsItalic(selection.hasFormat('italic'));
+      setIsUnderline(selection.hasFormat('underline'));
+      setIsStrikethrough(selection.hasFormat('strikethrough'));
+    }
   }, [activeEditor]);
 
   /**

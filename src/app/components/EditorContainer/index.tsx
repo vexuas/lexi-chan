@@ -8,6 +8,9 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { ToolbarPlugin } from '../ToolbarPlugin';
 import { MergeTagNode } from '../CustomNodes/MergeTagNode';
+import { NodeTransform } from '../NodeTransform';
+import { useEffect } from 'react';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 //Definitely check out this first and play with the demo: https://lexical.dev/docs/getting-started/react
 export default function EditorContainer() {
@@ -53,6 +56,14 @@ export default function EditorContainer() {
     onError,
     nodes: [MergeTagNode], //Custom Nodes
   };
+
+  const AutoFocusPlugin = () => {
+    const [editor] = useLexicalComposerContext();
+    useEffect(() => {
+      editor.focus();
+    }, [editor]);
+    return null;
+  };
   return (
     <div className={styles.Container}>
       <div className={styles.Header}>Lexichan</div>
@@ -67,6 +78,8 @@ export default function EditorContainer() {
           />
           <OnChangePlugin onChange={onChange} />
           <HistoryPlugin />
+          <NodeTransform />
+          <AutoFocusPlugin />
         </div>
       </LexicalComposer>
     </div>
